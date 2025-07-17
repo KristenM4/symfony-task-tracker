@@ -4,6 +4,9 @@ module.exports = {
     "./public/styles/*.{js,jsx,ts,tsx,vue}",
     "./templates/**/*.html.twig"
   ],
+  safelist: [
+    'opacity-0',
+  ],
   theme: {
     extend: {},
   },

@@ -30,6 +30,7 @@ class TaskController extends AbstractController
         $title = $request->request->get('title');
 
         if (!$title) {
+            $this->addFlash('error', 'Title is required');
             return $this->redirectToRoute('tasks_list');
         }
 
@@ -39,6 +40,7 @@ class TaskController extends AbstractController
         $entityManager->persist($task);
         $entityManager->flush();
 
+        $this->addFlash('success', 'Task added!');
         return $this->redirectToRoute('tasks_list');
     }
 
@@ -51,7 +53,6 @@ class TaskController extends AbstractController
 
         $task->setIsDone(!$task->isDone());
         $entityManager->flush();
-
         return $this->redirectToRoute('tasks_list');
     }
 

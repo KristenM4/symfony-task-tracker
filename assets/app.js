@@ -7,3 +7,15 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.flash-dismiss').forEach(function (button) {
+        button.addEventListener('click', function () {
+            const flashContainer = button.closest('div.flash-message');
+            if (flashContainer) {
+                flashContainer.classList.add('opacity-0');
+                setTimeout(() => flashContainer.remove(), 300);
+            }
+        });
+    });
+});

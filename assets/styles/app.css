@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+.flash-message {
+    @apply absolute inset-x-0 px-4 py-3 w-fit rounded-sm mx-auto text-center font-bold
+    transition transition-opacity duration-300;
+}
