@@ -13,6 +13,6 @@ class TaskController extends AbstractController
     #[Route('', name: 'tasks_list', methods: ['GET'])]
     public function index() : Response
     {
-        return new Response('tasks will go here');
+        return $this->render('task/task.html.twig');
     }
 }
