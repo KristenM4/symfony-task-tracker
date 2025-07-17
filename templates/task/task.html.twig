@@ -1,5 +1,27 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Tasks</h1>
+    <div class="max-w-md mx-auto mt-8">
+        <h2 class="text-xl font-bold mb-4">Task Tracker</h2>
+
+        <form method="POST" action="/tasks" class="mb-4 flex">
+            <input name="title" class="border p-2 flex-grow rounded-l" placeholder="New task..." required>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded-r">Add</button>
+        </form>
+
+        <ul class="bg-white shadow-md rounded p-4">
+            <!-- Sample task item -->
+            <li class="flex justify-between items-center mb-2">
+                <span class="line-through text-gray-500">Sample Task</span>
+                <form method="POST" action="/tasks/1/toggle" class="inline">
+                    <button class="text-green-500">✔</button>
+                </form>
+                <form method="POST" action="/tasks/1/delete" class="inline ml-2">
+                    <button class="text-red-500">
+                        🗑
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
 {% endblock %}
