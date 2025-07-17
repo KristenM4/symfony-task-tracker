@@ -1,6 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="max-w-md mx-auto mt-8">
         <h2 class="text-xl font-bold mb-4">Task Tracker</h2>
 
@@ -10,18 +17,23 @@
         </form>
 
         <ul class="bg-white shadow-md rounded p-4">
-            <!-- Sample task item -->
-            <li class="flex justify-between items-center mb-2">
-                <span class="line-through text-gray-500">Sample Task</span>
-                <form method="POST" action="/tasks/1/toggle" class="inline">
-                    <button class="text-green-500">✔</button>
-                </form>
-                <form method="POST" action="/tasks/1/delete" class="inline ml-2">
-                    <button class="text-red-500">
-                        🗑
-                    </button>
-                </form>
-            </li>
+            {% if tasks %}
+                {% for task in tasks %}
+                    <li class="flex justify-between items-center mb-2">
+                        <span class="{{ task.isDone ? 'line-through' }} text-gray-500">{{ task.title }}</span>
+                        <form method="POST" action="/tasks/{{ task.id }}/toggle" class="inline">
+                            <button class="text-green-500">✔</button>
+                        </form>
+                        <form method="POST" action="/tasks/{{ task.id }}/delete" class="inline ml-2">
+                            <button class="text-red-500">
+                                🗑
+                            </button>
+                        </form>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>There are no tasks to display.</p>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}
