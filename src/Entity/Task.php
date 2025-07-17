@@ -6,6 +6,7 @@ use App\Repository\TaskRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Task
 {
     #[ORM\Id]
@@ -17,7 +18,7 @@ class Task
     private ?string $title = null;
 
     #[ORM\Column]
-    private ?bool $is_done = null;
+    private ?bool $is_done = false;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $created_at = null;
@@ -27,6 +28,19 @@ class Task
 
     #[ORM\Column(nullable: true)]
     private ?\DateTime $deleted_at = null;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTimeImmutable();
+        $this->updated_at = new \DateTime();
+        $this->is_done = false;
+    }
+
+    #[ORM\PreUpdate]
+    public function onPreUpdate(): void
+    {
+        $this->updated_at = new \DateTime();
+    }
 
     public function getId(): ?int
     {
