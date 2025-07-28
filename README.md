@@ -16,6 +16,11 @@ This is a small task tracker built with Symfony 6.4 and Tailwind CSS 3.4. It use
 
 ### Quick Start
 Run the following commands to install dependencies and start the local server.
+#### With Docker:
+```
+docker-compose up -d --build
+```
+#### Without Docker:
 ```
 composer install          
 npm install
